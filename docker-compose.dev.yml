@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5173:5173
+    volumes:
+      - type: bind
+        source: ./app/src
+        target: /app/src
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - type: bind
+        source: ./backend/src
+        target: /app/src
+    depends_on:
+      - db
+    ports:
+      - 80:80
+  db:
+    image: mysql:5.7
+    env_file:
+      - ./db/.env
+    restart: always
+    volumes:
+      - type: volume
+        source: dbdev
+        target: /var/lib/mysql
+volumes:
+  dbdev:
+
+  
+
