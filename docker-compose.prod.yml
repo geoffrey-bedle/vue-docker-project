@@ -8,6 +8,13 @@ services:
       - type: bind
         source: ./app/src
         target: /app/src
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
+    restart: unless-stopped
  
   
 
