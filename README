@@ -1,0 +1,4 @@
+Run npm install
+docker-compose -f docker-compose.dev.yml up --build
+or
+docker-compose -f docker-compose.prod.yml up --build
